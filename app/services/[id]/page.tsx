@@ -17,7 +17,7 @@ export default function Service() {
       const response = await fetch(
         'https://jsonplaceholder.typicode.com/albums'
       );
-      setTimeout(() => {}, 4000);
+      
       return await response.json();
     },
   });
