@@ -3,6 +3,7 @@
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
+import { Suspense } from 'react';
 
 export default function Service() {
   const params = useParams<{ id: string }>();
@@ -14,6 +15,8 @@ export default function Service() {
   const { data, isLoading, isFetching, isPending, error } = useQuery({
     queryKey: ['albums'],
     queryFn: async () => {
+      //to test suspense
+      await new Promise((resolve) => setTimeout(resolve, 5500));
       const response = await fetch(
         'https://jsonplaceholder.typicode.com/albums'
       );
