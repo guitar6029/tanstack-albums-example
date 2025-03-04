@@ -25,9 +25,9 @@ export default function Service() {
     },
   });
 
-  if (isPending) {
-    return 'Loading...';
-  }
+  // if (isPending) {
+  //   return 'Loading...';
+  // }
 
   if (error) {
     return 'Error loading data.' + error.message;
@@ -37,7 +37,9 @@ export default function Service() {
     <div className="flex flex-col gap-2">
       <Link href={'/services'}> go back to Services</Link>
       <h1>Service {params.id} </h1>
-      {data.map((item: { id: number; userId: number; title: string }) => {
+      <Suspense fallback={<div>Loading Albums...</div>}>
+
+      {data?.map((item: { id: number; userId: number; title: string }) => {
         return (
           <div key={item.id} className="flex flex-col gap-2 ">
             <span>ID : {item.id}</span>
@@ -46,6 +48,7 @@ export default function Service() {
           </div>
         );
       })}
+      </Suspense>
     </div>
   );
 }
